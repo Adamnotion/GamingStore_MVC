@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="title"><strong>Welcome to Adam's Gaming store</strong></h1>
+    <div id="background">
+        <img src="/assets/pc-games-dvd-1000x1000.jpg" alt="PC Games DVD" class="img-fluid">
+    </div>
+    <br />
+     <br />
+    <p>Learn about me on <a href="https://www.linkedin.com/in/adam-boufeid-454918289/">My LinkedIn</a>.</p>
+</div>
+<style>
+    .title{
+
+        background-color: rgba(0,0,0,0.8);
+        color:white;
+  
+        font-size:60px;
+        
+    }
+    #background {
+        width: 120%;
+        height: 100%;
+        position: fixed;
+        left: -50px;
+        top: 0px;
+        z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        transition-duration:5s;
+        background-repeat: repeat-x;
+        opacity:0.5;
+    }
+
+    img:hover{
+        transform:translateX(-100px);
+    }
+        
+    p{  
+        position:relative;
+        top:610px;
+        background-color: rgba(0,0,0,0.8);
+        color: white;
+    }
+
+    a{
+        color: royalblue;
+    }
+</style>

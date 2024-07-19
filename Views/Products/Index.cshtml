@@ -1,0 +1,79 @@
+﻿@model List<Product>
+@{
+
+}
+<style>
+    .imgProd {
+        transition-duration:0.5s;
+        cursor:pointer;
+    }
+
+    .imgProd:hover {
+        transform:scale(3);
+        box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+    .imgProd:active{
+            transform: scale(5);
+            cursor:grabbing;
+
+    }
+</style>
+<h2 class="text-center mb-5">List of Products</h2>
+
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Products" asp-action="Create">New Product</a>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <div class="input-group">
+            <input type="search" id="searchInput" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button type="button" class="btn btn-outline-primary" data-mdb-ripple-init>Search</button>
+        </div>
+    </div>
+</div>
+
+
+<table class="table" id="dataTable">
+    <thead class="table-dark">
+        <tr>
+            <th class="font-weight-bold">ID</th>
+            <th class="font-weight-bold">Name</th>
+            <th class="font-weight-bold">Brand</th>
+            <th class="font-weight-bold">Category</th>
+            <th class="font-weight-bold">Price</th>
+            <th class="font-weight-bold">Image</th>
+            <th class="font-weight-bold">CreatedAt</th>
+            <th class="font-weight-bold">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Brand</td>
+                <td>@product.Category</td>
+                <td>@product.Price</td>
+                <td><img class="imgProd" src="/assets/@product.ImageFileName" width="100" /></td>
+                <td>@product.CreatedAt.ToString("MM/dd/yyyy")</td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" onclick="return confirm('Do you want to delete this product?') ">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#searchInput').on('keyup', function () {
+                var value = $(this).val().toLowerCase();
+                $('#dataTable tbody tr').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
